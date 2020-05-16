@@ -63,7 +63,7 @@ void setup() {
 	pinMode(BuzzerPlus, OUTPUT);
 	digitalWrite(BuzzerPlus, LOW);
 	pinMode(EncoderPower, OUTPUT);
-	digitalWrite(EncoderPower, HIGH);  
+	digitalWrite(EncoderPower, HIGH);
 	pinMode(EncoderButton, INPUT_PULLUP);
 	knob.write(0);
 	FastLED.addLeds<NEOPIXEL, LEDData>(leds, LEDs);
@@ -79,12 +79,12 @@ void ShortPress() {
 	if (CurrentState == OffState) {
 		CurrentState = OnState;
 		FastLED.setBrightness(CurrentBrightness);
-    FastLED.show();
+	FastLED.show();
 		EEPROM.update(EEPROMState, CurrentState);
 	} else if (CurrentState == OnState) {
 		CurrentState = OffState;
 		FastLED.setBrightness(0);
-    FastLED.show();
+	FastLED.show();
 		EEPROM.update(EEPROMState, CurrentState);
 	} else if (CurrentState == ColorState) {
 		CurrentState = BrightnessState;
@@ -131,7 +131,7 @@ void HandleButton() {
 					ButtonLocked = true;
 					// Call continuous press function
 					LongPress();
-          LongBeep();
+					LongBeep();
 				}
 			} else {
 				// Store last time button was pressed
@@ -172,9 +172,9 @@ void ClockwiseStep() {
 	} else if (CurrentState == BrightnessState) {
 		if (CurrentBrightness < 254) {
 			CurrentBrightness++;
-      CurrentBrightness++;
+			CurrentBrightness++;
 			FastLED.setBrightness(CurrentBrightness);
-      FastLED.show();
+			FastLED.show();
 			//Beep();
 		} else {
 			LongBeep();
@@ -194,9 +194,9 @@ void CounterClockwiseStep() {
 	} else if (CurrentState == BrightnessState) {
 		if (CurrentBrightness > 1) {
 			CurrentBrightness--;
-      CurrentBrightness--;
+			CurrentBrightness--;
 			FastLED.setBrightness(CurrentBrightness);
-      FastLED.show();
+			FastLED.show();
 			//Beep();
 		} else {
 			LongBeep();
@@ -209,13 +209,13 @@ void HandleEncoder() {
 	if (NewPosition < EncoderPosition) {
 		if (Clockwise) {
 			NewPosition = 0;
-			knob.write(0);			
+			knob.write(0);
 		}
 		Clockwise = false;
 	} else if (NewPosition > EncoderPosition) {
 		if (!Clockwise) {
 			NewPosition = 0;
-			knob.write(0);			
+			knob.write(0);
 		}
 		Clockwise = true;
 	}
@@ -233,7 +233,9 @@ void HandleEncoder() {
 }
 
 void loop() {
+
 	HandleButton();
 
 	HandleEncoder();
+	
 }
